@@ -1,0 +1,54 @@
+//530. Minimum Absolute Difference in BST
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+class Solution {
+public:
+     int dif;
+     int maxv(TreeNode * root){
+          int lef = INT_MIN;
+          int righ = INT_MIN;
+          if(root->left)
+            lef = max(lef,maxv(root->left));
+          if(root->right)
+            righ = max(righ,maxv(root->right));
+          return max(root->val,max(lef,righ));  
+     }
+
+     int minv(TreeNode * root){
+          int lef = INT_MAX;
+          int righ = INT_MAX;
+          if(root->left)
+            lef = min(lef,minv(root->left));
+          if(root->right)
+            righ = min(righ,minv(root->right));
+          return min(root->val,min(lef,righ));  
+     }
+     void solve(TreeNode*  root){
+          if(!root)
+          return ;
+          if(root->left){
+            dif=min(dif,root->val-maxv(root->left));
+            solve(root->left);
+          }            
+          if(root->right)
+          {
+            dif=min(dif,minv(root->right)-root->val);
+            solve(root->right);
+          }
+     }
+
+    int getMinimumDifference(TreeNode* root) {    
+        dif =INT_MAX;
+        solve(root);
+        return dif;
+    }
+};
