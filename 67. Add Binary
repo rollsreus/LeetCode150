@@ -1,0 +1,42 @@
+class Solution {
+public:
+
+    int atoi(char c){
+        return c-'0';
+    }
+    string addBinary(string a, string b) {
+        string ans="";
+        int n = a.length();
+        int m = b.length();
+        reverse(a.begin(),a.end());
+        reverse(b.begin(),b.end());
+        int carry=0;
+        int i=0;
+        while(n>0 && m>0){
+            ans += to_string(atoi(a[i]) ^ atoi(b[i]) ^ carry);
+            carry = atoi(a[i]) + atoi(b[i]) + carry > 1 ? 1 : 0;
+            i++;
+            n--;
+            m--;
+        }
+
+        while(n>0){
+            ans += to_string(atoi(a[i]) ^ carry);
+            carry = atoi(a[i]) + carry > 1 ? 1 : 0;
+            i++;
+            n--;
+        }
+
+        while(m>0){
+            ans +=  to_string(atoi(b[i]) ^ carry);
+            carry = atoi(b[i]) + carry > 1 ? 1 : 0;
+            i++;
+            m--;
+        }
+        
+        if(carry)
+        ans+="1";
+        reverse(ans.begin(),ans.end());
+        return ans;
+    }
+};
