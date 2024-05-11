@@ -1,0 +1,15 @@
+class Solution {
+public:
+    uint32_t reverseBits(long n) {
+      
+        long ans=0;
+        long k=(long)pow(2,31);
+        int i=0;
+        while(k){
+            ans+= k&n ? pow(2,i) : 0;
+            k/=2;
+            i++;
+        }
+        return ans;
+    }
+};
