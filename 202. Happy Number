@@ -1,0 +1,24 @@
+class Solution {
+public:
+    map<int,int> mp;
+    int sol(int n){
+        int ans=0;
+        while(n){
+           int k =n%10;
+           ans+=k*k;
+           n/=10;
+        }
+        return ans;
+    }
+
+    bool isHappy(int n) {
+        while(mp.find(n)==mp.end()){
+            mp[n]++;
+            if(n==1)
+            return true;
+            n = sol(n);
+        }
+        return false;
+
+    }
+};
