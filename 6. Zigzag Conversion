@@ -1,0 +1,28 @@
+class Solution {
+public:
+    string convert(string s, int num) {
+        if(num==1)
+        return s;
+        vector<string> v(num,"");
+        int i=0;
+        int j=0;
+        int inc=1;
+        while(i<s.length()){
+            v[j]+=s[i];
+
+            if(j==num-1 || (j==0&&i))
+              inc*=-1;
+            
+            j+=inc;
+            i++;
+        }
+
+
+        string ans="";
+        for(auto t : v){
+            ans+=t;
+        }
+        return ans;
+        
+    }
+};
