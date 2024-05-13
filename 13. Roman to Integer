@@ -1,0 +1,37 @@
+class Solution {
+public:
+    map<string,int> m;
+    int romanToInt(string s) {
+         m["I"] =1;
+         m["IV"] =4;
+         m["V"] =5;
+         m["IX"] =9;
+         m["X"] =10;
+         m["XL"] =40;
+         m["L"] =50;
+         m["XC"]=90;
+         m["C"]=100;
+         m["CD"]=400;
+         m["D"]=500;
+         m["CM"]=900;
+         m["M"]=1000;
+        
+        int n=s.length();
+        int ans=0;
+        for(int i=0;i<n;){
+            string a,b;
+            a =s.substr(i,1);
+            b = i<n-1 ? s.substr(i,2) : a;
+            if(m[b]>m[a]){
+               ans+=m[b];
+               i+=2;
+            }
+            else
+            {
+                ans+=m[a];
+                i++;
+            }              
+        }
+        return ans;
+    }
+};
