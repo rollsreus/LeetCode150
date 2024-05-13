@@ -1,0 +1,20 @@
+class Solution {
+public:
+    int lengthOfLastWord(string s) {
+        string t="";
+        string ans="";
+        for(auto ch : s){
+            if(ch!=' ')
+              t+=ch;
+            else
+            {
+                if(t!="")
+                ans=t;
+                t="";
+            }  
+        }
+        if(t!="")
+        return t.length();
+        return ans.length();
+    }
+};
