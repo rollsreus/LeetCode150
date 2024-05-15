@@ -1,0 +1,42 @@
+class Solution {
+public:
+    bool sol (string s , int in ,map <string , int> &m ){
+        if(in==s.length())
+            return true;
+        for(int i=in;i<s.length();i++){
+            if(m.find(s.substr(in,i-in+1))!=m.end()){
+                if(sol(s,i+1,m))
+                    return true;
+            }
+        }
+        return false;
+    }
+    bool wordBreak(string s, vector<string>& wordDict) {
+       /* map <string , int> m;
+        for(int i=0;i<wordDict.size();i++){
+            m[wordDict[i]]++;
+        }
+        return sol(s,0,m);*/
+           int n=s.length();
+     int m=wordDict.size();
+    if(m==0)
+        return n==0; 
+    vector<bool>dp(n+1);
+    for(int i=0;i<=n;i++)
+        dp[i]=false;
+    dp[n]=true;
+    for(int i=n-1;i>=0;i--){
+        for(int j=0;j<m;j++){
+           int len=wordDict[j].length();
+            if(i+len<=n){
+                if(s.substr(i,len)==wordDict[j])
+                {dp[i]=dp[i+len];
+                 if(dp[i]) break;
+                }
+            }
+        }
+    }
+    return dp[0];
+}
+    
+};
