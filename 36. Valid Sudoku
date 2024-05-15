@@ -1,0 +1,68 @@
+class Solution {
+public:
+    int sti(char k){
+        return k-'0';
+    } 
+    bool isValidRow(vector<vector<char>>& board, int row){
+       map<int,int> mp;
+       for(int i=0;i<9;i++){
+           if(board[row][i]!='.'){
+               int  k  =sti(board[row][i]);
+               mp[k]++;
+               if(mp[k]>1){
+                 //  cout<<"row";
+                   return false;
+               }
+           }           
+       }
+       return true;
+    }
+
+    bool isValidColumn(vector<vector<char>>& board, int col){
+         map<int,int> mp;
+       for(int i=0;i<9;i++){
+           if(board[i][col]!='.'){
+               int  k  =sti(board[i][col]);
+              mp[k]++;
+              if(mp[k]>1){
+                 // cout<<"col"<<i;
+                return false;
+              }
+           }
+           
+       }
+       return true;
+
+    }
+
+    bool isValidBox(vector<vector<char>>& board){
+        
+        vector<int> xin{0,0,0,3,3,3,6,6,6};
+        vector<int> yin{0,3,6,0,3,6,0,3,6};
+        for(int t=0;t<9;t++){
+            int x = xin[t];
+            int y = yin[t];
+            map<int,int> mp;
+        for(int i=0;i<3;i++){
+            for(int j=0;j<3;j++){
+                if(board[x+i][y+j]!='.'){
+                    int k =sti(board[x+i][y+j]);
+                    mp[k]++;
+                    if(mp[k]>1){
+                        return false;
+                    }
+                }
+            }
+        }
+        }
+        return true;
+    } 
+    bool isValidSudoku(vector<vector<char>>& board) {
+        bool ans=true;
+        for(int i=0;i<9;i++){
+            if(!isValidRow(board,i)||!isValidColumn(board,i))
+            return false;
+        }
+        return isValidBox(board);
+    }
+};
