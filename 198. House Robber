@@ -1,0 +1,23 @@
+class Solution {
+public:
+    int rob(vector<int>& nums) {
+        int k=nums.size();
+        if(k==0)
+            return 0;
+        if(k==1)
+            return nums[0];
+         int dp[k];
+        memset(dp,0,sizeof(dp));
+        dp[0]=nums[0];
+        if(k>1){
+            dp[1]=nums[1];
+            for(int i=2;i<k;i++){
+                if(i>2)
+              dp[i]=max(dp[i-2] , dp[i-3])+nums[i];
+                if(i==2)
+                    dp[i]=max(dp[i-2] , 0)+nums[i];
+            }
+        }
+        return max(dp[k-1],dp[k-2]);
+    }
+};
