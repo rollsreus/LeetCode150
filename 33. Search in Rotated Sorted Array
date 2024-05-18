@@ -1,0 +1,49 @@
+class Solution {
+public:
+     int bis(vector<int> v ,int l,int r,int tar){
+            // for(int i=l;i<=r;i++){
+            //      cout<<v[i]<<endl;
+            // }
+            // cout<<"======";
+            if(tar<v[l]||tar>v[r])
+            return -1;
+            while(l<r){
+                int m = (l+r)/2;
+                
+                if(v[m]<tar){
+                    l=m+1;
+                }
+                else{
+                    r=m;
+                }
+            }
+            
+            if(v[l]==tar)
+            return l;
+           
+            return -1;
+     }
+
+    int search(vector<int>& nums, int tar) {
+         int n =nums.size();          
+         if(nums[n-1]>=nums[0]){
+            return bis(nums,0,n-1,tar);
+         }
+         else{
+            int l=0;
+            int r=n-1;
+            while(l<r ){
+                int m = (l+r)/2;
+                if(nums[m]<nums[r]){
+                    r=m;
+                }
+                else{
+                    l=m+1;
+                }
+            }
+            //cout<<bis(nums,0,l,tar)<<endl<<bis(nums,l+1,n-1,tar);
+            return max(bis(nums,0,l-1,tar), bis(nums,l,n-1,tar));
+        
+         }
+    }
+};
