@@ -1,0 +1,44 @@
+class Solution {
+public:
+    int bis(vector<int> v , int tar){
+        int n = v.size();
+        int l=0;
+        int r=n-1;
+        while(l<r){
+           int m =(l+r)/2;
+           if(v[m]<tar){
+              l=m+1;
+           }
+           else
+             r = m;
+        }
+        if(v[l]==tar)
+        return l;
+        return -1;
+    }
+
+    int bis2(vector<int> v , int tar){        
+        int n = v.size();
+        int l=0;
+        int r=n-1;
+        while(l<r){
+           int m =(l+r+1)/2;
+           if(v[m]>tar){
+              r=m-1;
+           }
+           else
+             l = m;
+        }
+        if(v[r]==tar)
+        return r;
+        return -1;
+    }
+    vector<int> searchRange(vector<int>& nums, int tar) {
+      vector<int> ans={-1,-1};
+      if(!nums.size())
+      return ans;
+      ans[0]=bis(nums,tar);   
+      ans[1]=bis2(nums,tar);
+      return ans;   
+    }
+};
