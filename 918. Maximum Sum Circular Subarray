@@ -1,0 +1,53 @@
+class Solution {
+public:
+     int sol(vector<int> v,int i){
+         int n = v.size();
+         int cur;
+         int ans;
+         for(int j=i;j-i<n;j++){
+             
+             if(i==j){
+                 cur=v[j%n];
+                 ans = v[j%n];
+             }
+             else{
+                 cur+=v[j%n];
+                 ans =max(ans,cur);
+             }
+             if(cur<0){
+                 cur=0;
+             }
+         }
+         return ans;
+     }
+    int maxSubarraySumCircular(vector<int>& nums) {
+        int n=nums.size();
+        int ans=0;
+        int cur=0;
+        int misum=0;
+
+    
+        for(int i=0;i<n;i++){
+            ans+=nums[i];
+            if(!i){
+                cur = nums[0];
+                misum = cur;
+            }
+            else
+            {
+                cur+=nums[i];
+                misum = min(misum,cur);
+            }
+            if(cur>0){
+                cur=0;
+            }
+        }
+        if(misum==ans)
+        return sol(nums,0);
+        if(misum<0){
+            ans =max(ans-misum,ans);
+        }
+        ans =max(ans,sol(nums,0));
+        return ans;
+    }
+};
