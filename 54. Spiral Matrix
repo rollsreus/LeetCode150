@@ -1,0 +1,33 @@
+class Solution {
+public:
+    vector<int> spiralOrder(vector<vector<int>>& mat) {
+        vector<int> xin{0,1,0,-1};
+        vector<int> yin{1,0,-1,0};
+
+        int m = mat.size();
+        int n = mat[0].size();
+        int k = m*n;
+        vector<vector<int>> vis(m,vector<int>(n,0));
+        vector<int> ans;
+        int t=0;
+        int x=0;
+        int y=0;
+        while(k--){
+            vis[x][y] =1;
+            ans.push_back(mat[x][y]);
+            if(x+xin[t]>=m||x+xin[t]<0||y+yin[t]>=n||y+yin[t]<0)
+            {
+                t++;
+                t%=4;
+            }
+            if(x+xin[t]<m&&x+xin[t]>=0&&y+yin[t]<n&&y+yin[t]>=0&&vis[x+xin[t]][y+yin[t]]){
+                 t++;
+                 t%=4;
+            }
+            x+=xin[t];
+            y+=yin[t]; 
+        }
+        return ans;
+        
+    }
+};
