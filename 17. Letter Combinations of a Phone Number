@@ -1,0 +1,61 @@
+class Solution {
+public:
+    vector<string>v;
+    void sol(string d, int i ,string cur){
+       if(i==d.length())
+       {
+           v.push_back(cur);
+           return;
+       }
+       if(d[i]=='2'){
+           sol(d,i+1,cur+"a");
+            sol(d,i+1,cur+"b");
+             sol(d,i+1,cur+"c");
+       }
+       if(d[i]=='3'){
+           sol(d,i+1,cur+"d");
+            sol(d,i+1,cur+"e");
+             sol(d,i+1,cur+"f");
+       }
+       if(d[i]=='4'){
+           sol(d,i+1,cur+"g");
+            sol(d,i+1,cur+"h");
+             sol(d,i+1,cur+"i");
+       }if(d[i]=='5'){
+           sol(d,i+1,cur+"j");
+            sol(d,i+1,cur+"k");
+             sol(d,i+1,cur+"l");
+       }
+       if(d[i]=='6'){
+           sol(d,i+1,cur+"m");
+            sol(d,i+1,cur+"n");
+             sol(d,i+1,cur+"o");
+       }
+       if(d[i]=='7'){
+           sol(d,i+1,cur+"p");
+            sol(d,i+1,cur+"q");
+             sol(d,i+1,cur+"r");
+             sol(d,i+1,cur+"s");
+       }
+       if(d[i]=='8'){
+           sol(d,i+1,cur+"t");
+            sol(d,i+1,cur+"u");
+             sol(d,i+1,cur+"v");
+       }
+        if(d[i]=='9'){
+           sol(d,i+1,cur+"w");
+            sol(d,i+1,cur+"x");
+             sol(d,i+1,cur+"y");
+             sol(d,i+1,cur+"z");
+       }
+       return;
+    }
+    vector<string> letterCombinations(string digits) {
+        if(digits=="")
+        {
+            return v;
+        }
+       sol(digits, 0, "");
+       return v; 
+    }
+};
