@@ -1,0 +1,23 @@
+class Solution {
+public:
+    vector<vector<int>> ans;
+    vector<int> nums;
+    void solve(vector<int> v,int in , int tar){
+        if(tar<0||in>=nums.size())
+        return ;
+        if(tar==0)
+        {
+            ans.push_back(v);
+            return;
+        }
+        solve(v,in+1,tar);
+        v.push_back(nums[in]);
+        solve(v,in,tar-nums[in]);
+
+    }
+    vector<vector<int>> combinationSum(vector<int>& can, int tar) {
+          nums =can;
+          solve(vector<int>{},0,tar);
+          return ans;
+    }
+};
